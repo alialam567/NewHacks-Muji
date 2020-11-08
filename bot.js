@@ -161,7 +161,6 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                   file: 'MeanSD.txt'
                 });
               break;
-              // Just add any case commands if you want to..
 
       // !creator
               case 'NewHacks':

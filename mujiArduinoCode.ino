@@ -1,9 +1,5 @@
 #include <SoftwareSerial.h>
 SoftwareSerial MyBlue(2, 3); // RX | TX
-const byte DATA_MAX_SIZE = 32;
-char data[DATA_MAX_SIZE];   // an array to store the received data
-const int STATES = 64;
-bool state[STATES] = {false};
 String flag = "1";
 int LED = 7;
 #include <dht.h>
@@ -11,7 +7,6 @@ dht DHT;
 #define DHT11_PIN 8
 //const int LED = 4;
 
-String x;
 
 void setup() {
   MyBlue.begin(9600);
@@ -56,37 +51,3 @@ void serialFlush(){
     char t = MyBlue.read();
   }
 } 
-
-
-/*String receiveData(){
-  static char endMarker = '\n'; // message separator
-  char receivedChar;     // read char from serial port
-  int ndx = 0;          // current index of data buffer
-  // clean data buffer
-  memset(data, 32, sizeof(data));
-  // read while we have data available and we are
-  // still receiving the same message.
-  while(MyBlue.available() > 0) {
-    receivedChar = MyBlue.read();
-    if (receivedChar == endMarker) {
-      data[ndx] = '\0'; // end current message
-      String state = data;
-      return state;
-    }
-    // looks like a valid message char, so append it and
-    // increment our index
-    data[ndx] = receivedChar;
-    ndx++;
-    // if the message is larger than our max size then
-    // stop receiving and clear the data buffer.
-    if (ndx >= DATA_MAX_SIZE) {
-      break;
-    }
-  }
-  // no more available bytes to read from serial and we
-  // did not receive the separato. it's an incomplete message!
-  MyBlue.println("error: incomplete message");
-  MyBlue.println(data);
-  memset(data, 32, sizeof(data));
-}
-*/
